@@ -35,9 +35,18 @@ describe('server', () => {
 				});
 		});
 
-		// it('header content', () => {
-
-		// })
+		it('header content type should be json', () => {
+			return request(server)
+				.post('/games')
+				.send({
+					title       : 'Pacman',
+					genre       : 'Arcade',
+					releaseYear : 1980
+				})
+				.then((res) => {
+					expect(res[Content - Type]).toMatch(/json/);
+				});
+		});
 	});
 
 	describe('GET(/games)', () => {
@@ -54,8 +63,10 @@ describe('server', () => {
 			});
 		});
 
-		// it('header content', () => {
-
-		// })
+		it('header content type should be json', () => {
+			return request(server).get('/games').then((res) => {
+				expect(res['Content-Type']).toMatch(/json/);
+			});
+		});
 	});
 });
